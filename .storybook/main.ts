@@ -10,5 +10,8 @@ const config: StorybookConfig = {
 		'@storybook/addon-docs',
 	],
 	framework: '@storybook/sveltekit',
+	core: {
+		disableTelemetry: true,
+	},
 };
 export default config;
