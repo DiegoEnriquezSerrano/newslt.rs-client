@@ -1,0 +1,26 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: var(
+		--default-font,
+		'Open Sans',
+		'Liberation Sans',
+		'Arial',
+		'Segoe UI',
+		Tahoma,
+		Helvetica,
+		sans-serif
+	);
+}
+
+a {
+	color: var(--color-cyan);
+}
+
+:root {
+	--default-font: 'Open Sans';
+}
