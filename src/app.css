@@ -24,3 +24,11 @@ a {
 :root {
   --default-font: 'Open Sans';
 }
+
+#flash-message-container {
+  left: 0;
+  max-width: 500px;
+  right: 0;
+  top: 2rem;
+  z-index: +1002;
+}

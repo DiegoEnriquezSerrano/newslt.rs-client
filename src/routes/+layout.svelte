@@ -1,6 +1,7 @@
 <script lang="ts">
   import '../app.css';
   import favicon from '$lib/Assets/favicon.svg';
+  import FlashMessage from '$lib/Components/FlashMessage.svelte';
 
   let { children } = $props();
 </script>
@@ -29,3 +30,5 @@
 </svelte:head>
 
 {@render children()}
+
+<FlashMessage />
