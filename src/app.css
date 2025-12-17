@@ -32,3 +32,8 @@ a {
   top: 2rem;
   z-index: +1002;
 }
+
+figure[data-role='icon-container'] > svg {
+  height: 100%;
+  width: 100%;
+}
