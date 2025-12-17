@@ -2,6 +2,7 @@
   import '../app.css';
   import favicon from '$lib/Assets/favicon.svg';
   import FlashMessage from '$lib/Components/FlashMessage.svelte';
+  import { viewHeight, viewWidth } from '$lib/Stores/LayoutStore';
 
   let { children } = $props();
 </script>
@@ -28,6 +29,8 @@
     href="https://fonts.diegoenriquezserrano.dev/css/gz/liberation-mono.min.css"
   />
 </svelte:head>
+
+<svelte:window bind:innerWidth={$viewWidth} bind:innerHeight={$viewHeight} />
 
 {@render children()}
 
