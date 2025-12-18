@@ -14,9 +14,9 @@ export default defineConfig({
           browser: {
             enabled: true,
             provider: playwright(),
-            instances: [{ browser: 'chromium', headless: true }],
+            instances: [{ browser: 'firefox', headless: true }],
           },
-          include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+          include: ['src/**/*.svelte.{test,spec}.{js,ts}', 'spec/**/*.svelte.{test,spec}.{js,ts}'],
           exclude: ['src/lib/server/**'],
         },
       },
@@ -25,8 +25,8 @@ export default defineConfig({
         test: {
           name: 'server',
           environment: 'node',
-          include: ['src/**/*.{test,spec}.{js,ts}'],
-          exclude: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+          include: ['src/**/*.{test,spec}.{js,ts}', 'spec/**/*.{test,spec}.{js,ts}'],
+          exclude: ['src/**/*.svelte.{test,spec}.{js,ts}', 'spec/**/*.svelte.{test,spec}.{js,ts}'],
         },
       },
     ],
