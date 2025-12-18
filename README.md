@@ -1,40 +1,108 @@
-# sv
+# Newslt.rs-client
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+[![Bun CI](https://github.com/DiegoEnriquezSerrano/newslt.rs-client/actions/workflows/ci.yml/badge.svg)](https://github.com/DiegoEnriquezSerrano/newslt.rs-client/actions/workflows/ci.yml)
 
-## Creating a project
+A PWA for a multi-tenant blog built with SvelteKit that allows multiple users to create, manage, and subscribe to newsletters via a separate authorized Rust-based API server application. Includes support for unregistered user subscriptions. The API supports http-only cookie based sessions for authentication-gated requests.
 
-If you're seeing this, you've probably already done this step. Congrats!
+---
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Index
 
-# create a new project in my-app
-npx sv create my-app
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Running the Application](#running-the-application)
+- [Testing](#testing)
+- [License](#license)
+
+---
+
+## Features
+
+- User http-only cookie based authentication
+- Subscriptions
+- User profiles
+- Newsletter issue creation and publishing
+- Email delivery to subsribers
+
+---
+
+## Requirements
+
+- Node.js 22.19.0+
+- npm 10.9.3 +
+- Bun 1.3.4+
+
+---
+
+## Installation
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/DiegoEnriquezSerrano/newslt.rs-client
+   cd ./newslt.rs-client
+   ```
+
+2. Install project dependencies
+
+   ```bash
+   bun install
+   ```
+
+3. Start development server
+   ```bash
+   bun dev --host --open
+   ```
+
+---
+
+## Configuration
+
+1. Copy `.env.example` to `.env`
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Update environment variables in `.env`, refer to comments for directions on setting values.
+
+---
+
+## Running the Application
+
+1. Start your services using docker compose
+   ```bash
+   bun dev --host --open
+   ```
+
+Your client server will be accessible at `http://localhost:5173/`.
+
+---
+
+## Testing
+
+To run all tests use npm:
+
+```bash
+npm run test
 ```
 
-## Developing
+Otherwise you can run test suites independently with bun
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```bash
+bun test:unit
 ```
 
-## Building
+or
 
-To create a production version of your app:
-
-```sh
-npm run build
+```bash
+bun test:e2e
 ```
 
-You can preview the production build with `npm run preview`.
+---
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## License
 
-# newslt.rs-client
+This project is licensed under the GNU GENERAL PUBLIC LICENSE. See the COPYING file for details.
