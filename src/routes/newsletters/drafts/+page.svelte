@@ -2,8 +2,8 @@
   // dependencies
   import { resolve } from '$app/paths';
   // components
-  import BasePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
   import NewslettersHeader from '$lib/Components/NewslettersHeader.svelte';
+  import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
   // stores
   import { viewWidth } from '$lib/Stores/LayoutStore';
   // types
@@ -12,7 +12,7 @@
   let { data }: PageProps = $props();
 </script>
 
-<BasePageWrapper
+<ResponsivePageWrapper
   breadcrumbs={{
     links: [
       { url: resolve('/home'), label: 'Home' },
@@ -56,7 +56,12 @@
           <h2
             class="center-horizontal full-width line-height-extra-large overflow-hidden overflow-wrap-break-word squeeze-8 squish-16"
           >
-            {newsletter.title}
+            <a
+              class="text-color-cyan"
+              href={resolve(`/newsletters/${newsletter.newsletter_issue_id}`)}
+            >
+              {newsletter.title}
+            </a>
           </h2>
           <article-body class="center-horizontal flex-column squeeze-8">
             <!-- eslint-disable svelte/no-at-html-tags -->
@@ -66,4 +71,4 @@
       </section>
     {/each}
   </section>
-</BasePageWrapper>
+</ResponsivePageWrapper>

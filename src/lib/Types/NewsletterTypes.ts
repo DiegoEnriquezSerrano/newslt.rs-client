@@ -15,6 +15,10 @@ export type CreateNewsletterParams = {
   title: NewsletterType['title'];
 };
 
+export type PublishNewsletterParams = {
+  idempotencyKey: string;
+};
+
 export type PublicNewsletterType = {
   content: string;
   description: string;

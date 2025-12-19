@@ -3,11 +3,11 @@
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   // components
-  import BasePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
   import ExpandingTextarea from '$lib/Components/ExpandingTextarea.svelte';
   import FormButton from '$lib/Components/FormButton.svelte';
   import InputWithCounter from '$lib/Components/InputWithCounter.svelte';
   import NewslettersHeader from '$lib/Components/NewslettersHeader.svelte';
+  import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
   import Spinner from '$lib/Components/Spinner.svelte';
   // services
   import FlashMessageService from '$lib/Services/FlashMessageService';
@@ -40,7 +40,7 @@
   }
 </script>
 
-<BasePageWrapper
+<ResponsivePageWrapper
   breadcrumbs={{
     links: [
       { url: resolve('/home'), label: 'Home' },
@@ -131,4 +131,4 @@
       {/if}
     </div>
   </form>
-</BasePageWrapper>
+</ResponsivePageWrapper>
