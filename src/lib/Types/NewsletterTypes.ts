@@ -9,6 +9,12 @@ export type NewsletterType = {
   user_id: `${string}-${string}-${string}-${string}-${string}`;
 };
 
+export type CreateNewsletterParams = {
+  content: NewsletterType['content'];
+  description: NewsletterType['description'];
+  title: NewsletterType['title'];
+};
+
 export type PublicNewsletterType = {
   content: string;
   description: string;

@@ -3,6 +3,7 @@
   import { resolve } from '$app/paths';
   // components
   import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
+  import NewslettersHeader from '$lib/Components/NewslettersHeader.svelte';
   // stores
   import { viewWidth } from '$lib/Stores/LayoutStore';
   // types
@@ -30,6 +31,9 @@
     ],
   }}
 >
+  <section class="squish-16">
+    <NewslettersHeader links={[{ href: resolve('/newsletters/new'), label: 'New' }]} />
+  </section>
   <section class="full-width squish-8">
     {#each data.newsletters as newsletter (newsletter.newsletter_issue_id)}
       <section class="stack-24">
