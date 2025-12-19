@@ -15,6 +15,12 @@ export type CreateNewsletterParams = {
   title: NewsletterType['title'];
 };
 
+export type UpdateNewsletterParams = {
+  content: NewsletterType['content'];
+  description: NewsletterType['description'];
+  title: NewsletterType['title'];
+};
+
 export type PublishNewsletterParams = {
   idempotencyKey: string;
 };

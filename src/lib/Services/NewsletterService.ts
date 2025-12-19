@@ -4,6 +4,7 @@ import type {
   CreateNewsletterParams,
   NewsletterType,
   PublishNewsletterParams,
+  UpdateNewsletterParams,
 } from '$lib/Types/NewsletterTypes';
 
 const NewsletterService = {
@@ -46,6 +47,16 @@ const NewsletterService = {
           title: params.title,
         }),
       );
+
+      return fetch(url, opts);
+    },
+
+    async putNewsletter(
+      newsletter_issue_id: NewsletterType['newsletter_issue_id'],
+      params: UpdateNewsletterParams,
+    ): Promise<Response> {
+      const url = `${import.meta.env.VITE_API_URL}/admin/newsletters/${newsletter_issue_id}`;
+      const opts = ApiService.requestInit('PUT', JSON.stringify(params));
 
       return fetch(url, opts);
     },

@@ -1,5 +1,4 @@
 <script lang="ts">
-  // dependencies
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   // components
@@ -8,29 +7,56 @@
   import InputWithCounter from '$lib/Components/InputWithCounter.svelte';
   import NewslettersHeader from '$lib/Components/NewslettersHeader.svelte';
   import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
-  import Spinner from '$lib/Components/Spinner.svelte';
   // services
   import FlashMessageService from '$lib/Services/FlashMessageService';
   import NewsletterService from '$lib/Services/NewsletterService';
+  // types
+  import type { PageProps } from './$types';
+  import type { ResolvedPathname } from '$app/types';
 
-  let content: string = $state('');
-  let description: string = $state('');
+  let { data }: PageProps = $props();
+
+  let title: string = $derived(data.newsletter.title);
+  let content: string = $derived(data.newsletter.content);
+  let description: string = $derived(data.newsletter.description);
   let disabled: boolean = $state(false);
-  let title: string = $state('');
+  let breadcrumbs: { url: ResolvedPathname; label: string }[] = $state([]);
+
+  $effect(() => {
+    if (!data.newsletter.published_at) {
+      breadcrumbs = Array.from(
+        new Set([
+          { url: resolve('/home'), label: 'Dashboard' },
+          { url: resolve('/newsletters'), label: 'Newsletters' },
+          { url: resolve('/newsletters/drafts'), label: 'Drafts' },
+        ]),
+      );
+    } else {
+      breadcrumbs = Array.from(
+        new Set([
+          { url: resolve('/home'), label: 'Dashboard' },
+          { url: resolve('/newsletters'), label: 'Newsletters' },
+        ]),
+      );
+    }
+  });
 
   async function onSubmitNewsletter(e: SubmitEvent) {
     e.preventDefault();
     disabled = true;
 
-    const response = await NewsletterService.Api.postNewsletter({
-      content,
-      description,
-      title,
-    });
+    const response = await NewsletterService.Api.putNewsletter(
+      data.newsletter.newsletter_issue_id,
+      {
+        title,
+        content,
+        description,
+      },
+    );
 
     if (response.ok) {
-      await goto(resolve('/newsletters/drafts'));
-    } else {
+      await goto(resolve(`/newsletters/${data.newsletter.newsletter_issue_id}`));
+    } else if (response.status === 422) {
       const json = await response.json();
 
       FlashMessageService.setMessage({ type: 'error', message: json.error });
@@ -41,20 +67,14 @@
 </script>
 
 <ResponsivePageWrapper
-  breadcrumbs={{
-    links: [
-      { url: resolve('/home'), label: 'Home' },
-      { url: resolve('/newsletters'), label: 'Newsletters' },
-    ],
-    current: 'New',
-  }}
-  header={{ title: 'New' }}
+  breadcrumbs={{ links: breadcrumbs, current: 'Edit' }}
   footer={{
     links: [
       { label: 'Home', href: resolve('/home'), icon: 'home' },
       { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
     ],
   }}
+  header={{ title: data.newsletter.slug }}
   navigationOverlay={{
     links: [
       { label: 'Home', href: resolve('/home'), icon: 'home' },
@@ -65,15 +85,15 @@
   <section class="squish-16">
     <NewslettersHeader
       links={[
+        { href: resolve('/newsletters/new'), label: 'New' },
         { href: resolve('/newsletters'), label: 'Published' },
-        { href: resolve('/newsletters/drafts'), label: 'Drafts' },
       ]}
     />
   </section>
   <form
     action="/login"
-    class="align-items-start center-horizontal flex-column full-width gap-8 justify-content-start squeeze-16 squish-16"
     method="post"
+    class="align-items-start center-horizontal flex-column full-width gap-8 justify-content-start squeeze-16 squish-16"
     onsubmit={onSubmitNewsletter}
     style="max-width: 50rem;"
   >
@@ -99,8 +119,8 @@
       Description
     </label>
     <ExpandingTextarea
-      id="description"
       limit={200}
+      id="description"
       name="description"
       placeholder="Enter description"
       required={true}
@@ -116,19 +136,9 @@
       id="content-body"
       name="content-body"
       placeholder="Enter content body"
-      required
+      required={true}
       bind:value={content}
     />
-    <div class="align-items-center flex-row flex-wrap-wrap gap-16 justify-content-start">
-      <FormButton {disabled} type="submit">Submit</FormButton>
-      {#if disabled}
-        <div class="align-items-center flex-row gap-8">
-          Processing..
-          <div class="flex-row" style="width: var(--spacing-32);">
-            <Spinner />
-          </div>
-        </div>
-      {/if}
-    </div>
+    <FormButton {disabled} type="submit">Update</FormButton>
   </form>
 </ResponsivePageWrapper>
