@@ -1,5 +1,6 @@
 <script lang="ts">
   // components
+  import Breadcrumbs from '$lib/Components/Breadcrumbs.svelte';
   import Footer from '$lib/Components/Layouts/ResponsivePageFooter.svelte';
   import Header from '$lib/Components/Layouts/ResponsivePageHeader.svelte';
   import NavigationOverlay from '$lib/Components/NavigationOverlay.svelte';
@@ -9,11 +10,13 @@
   import type { ComponentProps, Snippet } from 'svelte';
 
   let {
+    breadcrumbs,
     children,
     footer,
     header,
     navigationOverlay,
   }: {
+    breadcrumbs?: ComponentProps<typeof Breadcrumbs>;
     children: Snippet;
     footer: ComponentProps<typeof Footer>;
     header: ComponentProps<typeof Header>;
@@ -33,6 +36,11 @@
     style="grid-area: home-page-content"
   >
     <section class="center-horizontal">
+      {#if breadcrumbs}
+        <section>
+          <Breadcrumbs {...breadcrumbs} />
+        </section>
+      {/if}
       {@render children()}
     </section>
   </section>
