@@ -24,7 +24,7 @@
   } = $props();
 </script>
 
-<main class="display-grid full-height full-width overflow-hidden" id="app">
+<main class="display-grid full-height full-width max-height-view-100 overflow-hidden" id="app">
   <Header {...header} />
   <section
     class:squeeze-16={$viewWidth > 650}

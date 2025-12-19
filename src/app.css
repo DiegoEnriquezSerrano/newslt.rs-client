@@ -23,6 +23,7 @@ a {
 
 :root {
   --default-font: 'Open Sans';
+  --height-view-100: 100vh;
 }
 
 figure[data-role='icon-container'] > svg {

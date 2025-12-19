@@ -18,6 +18,13 @@ const NewsletterService = {
       return await fetchFn(url, opts);
     },
 
+    async getAuthUserDraftNewsletters(fetchFn: FetchFn): Promise<Response> {
+      const url = `${import.meta.env.VITE_API_URL}/admin/newsletters/drafts`;
+      const opts = ApiService.requestInit();
+
+      return await fetchFn(url, opts);
+    },
+
     async postNewsletter(params: CreateNewsletterParams): Promise<Response> {
       const url = `${import.meta.env.VITE_API_URL}/admin/newsletters`;
       const opts = ApiService.requestInit(

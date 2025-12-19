@@ -63,7 +63,12 @@
   }}
 >
   <section class="squish-16">
-    <NewslettersHeader links={[{ href: resolve('/newsletters'), label: 'Published' }]} />
+    <NewslettersHeader
+      links={[
+        { href: resolve('/newsletters'), label: 'Published' },
+        { href: resolve('/newsletters/drafts'), label: 'Drafts' },
+      ]}
+    />
   </section>
   <form
     action="/login"
