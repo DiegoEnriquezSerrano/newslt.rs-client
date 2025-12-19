@@ -1,0 +1,8 @@
+<svg aria-labelledby="menuTitle menuDesc" fill="inherit" role="img" stroke-linecap="round" stroke-linejoin="round"
+  stroke-width="0" stroke="inherit" viewBox="58 58 400 400" xmlns="http://www.w3.org/2000/svg">
+  <title id="menuTitle">Menu</title>
+  <desc id="menuDesc">A vector hamburger icon.</desc>
+  <path
+    d="M390.7 188.6H121.3c-7.4 0-13.5-6-13.5-13.5 0-7.4 6-13.5 13.5-13.5h269.5c7.4 0 13.5 6 13.5 13.5-.1 7.5-6.1 13.5-13.6 13.5zM390.7 269.5H121.3c-7.4 0-13.5-6-13.5-13.5s6-13.5 13.5-13.5h269.5c7.4 0 13.5 6 13.5 13.5s-6.1 13.5-13.6 13.5zM390.7 350.3H121.3c-7.4 0-13.5-6-13.5-13.5s6-13.5 13.5-13.5h269.5c7.4 0 13.5 6 13.5 13.5s-6.1 13.5-13.6 13.5z">
+  </path>
+</svg>

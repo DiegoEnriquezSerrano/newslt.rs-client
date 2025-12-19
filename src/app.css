@@ -25,6 +25,11 @@ a {
   --default-font: 'Open Sans';
 }
 
+figure[data-role='icon-container'] > svg {
+  height: 100%;
+  width: 100%;
+}
+
 #flash-message-container {
   left: 0;
   max-width: 500px;
@@ -33,7 +38,3 @@ a {
   z-index: +1002;
 }
 
-figure[data-role='icon-container'] > svg {
-  height: 100%;
-  width: 100%;
-}

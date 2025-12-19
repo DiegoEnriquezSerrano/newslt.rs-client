@@ -20,7 +20,7 @@
     width?: [number, UnitLength];
   } = $props();
 
-  let style: string = $state('');
+  let style: string = $derived('');
 
   $effect(() => {
     style = [
@@ -37,5 +37,6 @@
 </script>
 
 <figure class={classes} {style} data-role="icon-container">
+  <!-- eslint-disable svelte/no-at-html-tags -->
   {@html icons[type]}
 </figure>
