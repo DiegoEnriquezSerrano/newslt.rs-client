@@ -65,7 +65,7 @@ const NewsletterService = {
       newsletter_issue_id: NewsletterType['newsletter_issue_id'],
       params: PublishNewsletterParams,
     ): Promise<Response> {
-      const url = `${import.meta.env.VITE_API_URL}/admin/newsletter/${newsletter_issue_id}/publish`;
+      const url = `${import.meta.env.VITE_API_URL}/admin/newsletters/${newsletter_issue_id}/publish`;
       const opts = ApiService.requestInit(
         'PUT',
         JSON.stringify({
