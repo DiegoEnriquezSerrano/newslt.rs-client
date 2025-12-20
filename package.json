@@ -16,7 +16,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "test:e2e": "vitest run --project=client && playwright test --project=firefox",
-    "test:unit": "vitest run --project=server",
+    "test:suite": "vitest run --project=server && vitest run --project=client && playwright test --project=firefox",
+    "test:unit": "vitest --project=server",
     "test": "npm run test:unit -- --run && npm run test:e2e",
     "typecheck": "vitest typecheck"
   },

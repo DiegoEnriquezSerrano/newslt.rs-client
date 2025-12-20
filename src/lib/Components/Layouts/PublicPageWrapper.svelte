@@ -1,13 +1,18 @@
 <script lang="ts">
+  // dependencies
+  import { resolve } from '$app/paths';
+  // components
   import Icon from '$lib/Components/Icon.svelte';
+  // stores
   import { viewWidth } from '$lib/Stores/LayoutStore';
+  // types
   import type { Snippet } from 'svelte';
 
   let { children }: { children: Snippet } = $props();
 </script>
 
 <main
-  class="display-grid full-width full-height overflow-hidden"
+  class="display-grid full-width full-height max-height-view-100 overflow-hidden"
   id="app"
   style="grid-template-rows: 4rem 1fr; grid-template-columns: 1fr; grid-template-areas: 'header' 'content';"
 >
@@ -18,7 +23,7 @@
     <p class="squeeze-8 squish-8 text-color-cyan font-weight-bold text-x-large cursor-default">
       Newsletters
     </p>
-    <a href="/login">
+    <a href={resolve('/login')}>
       <figure class="squish-8 squeeze-8">
         <Icon type="user" fill="var(--color-cyan)" height={[2, 'rem']} width={[2, 'rem']} />
       </figure>

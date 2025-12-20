@@ -1,6 +1,10 @@
 <script lang="ts">
+  // dependencies
   import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
+  // components
   import FormButton from '$lib/Components/FormButton.svelte';
+  // services
   import AuthenticationService from '$lib/Services/AuthenticationService';
   import FlashMessageService from '$lib/Services/FlashMessageService';
 
@@ -15,7 +19,7 @@
     const response = await AuthenticationService.Api.postLogin({ username, password });
 
     if (response.ok) {
-      await goto('/home');
+      await goto(resolve('/home'));
     } else if (response.status === 401) {
       const json = await response.json();
 
@@ -26,41 +30,41 @@
   }
 </script>
 
-<section class="full-width flex-column align-items-center squish-24">
-  <h1 class="squeeze-16 line-height-initial">Welcome back!</h1>
+<section class="align-items-center flex-column full-width squish-24">
+  <h1 class="line-height-initial squeeze-16">Welcome back!</h1>
   <form
     action="/login"
-    class="squish-16 squeeze-16 flex-column gap-8 justify-content-start align-items-center full-width"
+    class="align-items-center flex-column full-width gap-8 justify-content-start squeeze-16 squish-16"
     method="post"
     onsubmit={onLogin}
     style="max-width: 35rem;"
   >
     <input
-      class="full-width squeeze-16 squish-16 border-rounded-8 border-style-inset border-color-gray border-width-2 surface-char text-color-white letter-spacing-1"
+      class="border-color-gray border-rounded-8 border-style-inset border-width-2 full-width letter-spacing-1 squeeze-16 squish-16 surface-char text-color-white"
       id="username"
       name="username"
       placeholder="Enter Username"
-      type="text"
       required
+      type="text"
       bind:value={username}
     />
     <label
-      class="font-weight-bold full-width text-align-start stack-16 text-color-light squeeze-4"
+      class="font-weight-bold full-width squeeze-4 stack-16 text-align-start text-color-light"
       for="username"
     >
       Username
     </label>
     <input
-      class="full-width squeeze-16 squish-16 border-rounded-8 border-style-inset border-color-gray border-width-2 surface-char text-color-white letter-spacing-1"
+      class="border-color-gray border-rounded-8 border-style-inset border-width-2 full-width letter-spacing-1 squeeze-16 squish-16 surface-char text-color-white"
       id="password"
       name="password"
       placeholder="Enter Password"
-      type="password"
       required
+      type="password"
       bind:value={password}
     />
     <label
-      class="font-weight-bold full-width text-align-start stack-16 text-color-light squeeze-4"
+      class="font-weight-bold full-width squeeze-4 stack-16 text-align-start text-color-light"
       for="password"
     >
       Password

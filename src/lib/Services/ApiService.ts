@@ -1,5 +1,5 @@
-namespace ApiService {
-  export function requestInit(
+const ApiService = {
+  requestInit(
     method: RequestInit['method'] = 'GET',
     body?: RequestInit['body'],
     credentials: RequestInit['credentials'] = 'include',
@@ -14,7 +14,7 @@ namespace ApiService {
       method,
       body: body ? body : undefined,
     };
-  }
-}
+  },
+};
 
 export default ApiService;
