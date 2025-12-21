@@ -9,12 +9,14 @@
     links: [
       { label: 'Home', href: resolve('/home'), icon: 'home' },
       { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
+      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
     ],
   }}
   navigationOverlay={{
     links: [
       { label: 'Home', href: resolve('/home'), icon: 'home' },
       { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
+      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
     ],
   }}
 >

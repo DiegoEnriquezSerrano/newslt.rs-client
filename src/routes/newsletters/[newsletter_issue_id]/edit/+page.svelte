@@ -67,18 +67,25 @@
 </script>
 
 <ResponsivePageWrapper
-  breadcrumbs={{ links: breadcrumbs, current: 'Edit' }}
+  breadcrumbs={{
+    links: breadcrumbs,
+    current: 'Edit',
+  }}
   footer={{
     links: [
       { label: 'Home', href: resolve('/home'), icon: 'home' },
       { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
+      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
     ],
   }}
-  header={{ title: data.newsletter.slug }}
+  header={{
+    title: data.newsletter.slug,
+  }}
   navigationOverlay={{
     links: [
       { label: 'Home', href: resolve('/home'), icon: 'home' },
       { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
+      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
     ],
   }}
 >
@@ -90,55 +97,63 @@
       ]}
     />
   </section>
-  <form
-    action="/login"
-    method="post"
-    class="align-items-start center-horizontal flex-column full-width gap-8 justify-content-start squeeze-16 squish-16"
-    onsubmit={onSubmitNewsletter}
-    style="max-width: 50rem;"
-  >
-    <label
-      class="font-weight-bold full-width squeeze-4 text-align-start text-color-light"
-      for="title"
+  <section class="full-width flex-column align-items-start squeeze-8">
+    <form
+      action="/login"
+      method="post"
+      class="align-items-start center-horizontal flex-column full-width gap-8 justify-content-start squeeze-16 squish-16"
+      onsubmit={onSubmitNewsletter}
+      style="max-width: 50rem;"
     >
-      Title
-    </label>
-    <InputWithCounter
-      id="title"
-      limit={70}
-      name="title"
-      placeholder="Enter title"
-      required={true}
-      type="text"
-      bind:value={title}
-    />
-    <label
-      class="font-weight-bold full-width squeeze-4 text-align-start text-color-light"
-      for="description"
-    >
-      Description
-    </label>
-    <ExpandingTextarea
-      limit={200}
-      id="description"
-      name="description"
-      placeholder="Enter description"
-      required={true}
-      bind:value={description}
-    />
-    <label
-      class="font-weight-bold full-width squeeze-4 text-align-start text-color-light"
-      for="content-body"
-    >
-      Content body <sup>(Markdown allowed)</sup>
-    </label>
-    <ExpandingTextarea
-      id="content-body"
-      name="content-body"
-      placeholder="Enter content body"
-      required={true}
-      bind:value={content}
-    />
-    <FormButton {disabled} type="submit">Update</FormButton>
-  </form>
+      <fieldset class="full-width squish-0 squeeze-0 gap-8 flex-column">
+        <label
+          class="font-weight-bold full-width squeeze-4 text-align-start text-color-light"
+          for="title"
+        >
+          Title
+        </label>
+        <InputWithCounter
+          id="title"
+          limit={70}
+          name="title"
+          placeholder="Enter title"
+          required={true}
+          type="text"
+          bind:value={title}
+        />
+      </fieldset>
+      <fieldset class="full-width squish-0 squeeze-0 gap-8 flex-column">
+        <label
+          class="font-weight-bold full-width squeeze-4 text-align-start text-color-light"
+          for="description"
+        >
+          Description
+        </label>
+        <ExpandingTextarea
+          limit={200}
+          id="description"
+          name="description"
+          placeholder="Enter description"
+          required={true}
+          bind:value={description}
+        />
+      </fieldset>
+      <fieldset class="full-width squish-0 squeeze-0 gap-8 flex-column">
+        <label
+          class="font-weight-bold full-width squeeze-4 text-align-start text-color-light"
+          for="content-body"
+        >
+          Content body <sup>(Markdown allowed)</sup>
+        </label>
+        <ExpandingTextarea
+          id="content-body"
+          name="content-body"
+          placeholder="Enter content body"
+          required={true}
+          bind:value={content}
+        />
+      </fieldset>
+      <FormButton {disabled} type="submit">Update</FormButton>
+    </form>
+  </section>
 </ResponsivePageWrapper>
