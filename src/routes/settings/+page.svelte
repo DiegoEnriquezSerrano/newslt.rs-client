@@ -12,7 +12,7 @@
 
 <ResponsivePageWrapper {...data.responsivePageWrapperOpts}>
   <nav
-    class="full-width flex-column align-items-start squish-16 squeeze-8"
+    class="align-items-start center-horizontal flex-column full-width gap-8 justify-content-start squeeze-16 squish-16"
     style="max-width: 32rem;"
   >
     <div
