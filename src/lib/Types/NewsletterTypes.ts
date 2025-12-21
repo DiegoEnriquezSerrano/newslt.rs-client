@@ -1,3 +1,5 @@
+import type { AssociatedUserType } from './UserTypes';
+
 export type NewsletterType = {
   content: string;
   description: string;
@@ -31,4 +33,5 @@ export type PublicNewsletterType = {
   published_at: string;
   slug: string;
   title: string;
+  user: AssociatedUserType;
 };
