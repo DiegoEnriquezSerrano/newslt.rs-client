@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
   import { resolve } from '$app/paths';
   import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
+  import type { PageProps } from './$types';
+
+  let { data }: PageProps = $props();
 </script>
 
 <ResponsivePageWrapper
@@ -20,5 +23,5 @@
     ],
   }}
 >
-  <h1>Hello, user!</h1>
+  <h1>Hello, {data.user.username}!</h1>
 </ResponsivePageWrapper>
