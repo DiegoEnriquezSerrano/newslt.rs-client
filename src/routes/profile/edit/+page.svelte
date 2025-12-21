@@ -47,32 +47,7 @@
   }
 </script>
 
-<ResponsivePageWrapper
-  breadcrumbs={{
-    links: [
-      { url: resolve('/home'), label: 'Dashboard' },
-      { url: resolve('/profile'), label: 'Profile' },
-    ],
-    current: 'Update profile',
-  }}
-  header={{
-    title: 'Dashboard',
-  }}
-  footer={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
-    ],
-  }}
-  navigationOverlay={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
-    ],
-  }}
->
+<ResponsivePageWrapper {...data.responsivePageWrapperOpts}>
   <section class="full-width flex-column align-items-start squeeze-8">
     <form
       action="/login"

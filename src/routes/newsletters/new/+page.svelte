@@ -12,6 +12,10 @@
   // services
   import FlashMessageService from '$lib/Services/FlashMessageService';
   import NewsletterService from '$lib/Services/NewsletterService';
+  // types
+  import type { PageProps } from './$types';
+
+  let { data }: PageProps = $props();
 
   let content: string = $state('');
   let description: string = $state('');
@@ -40,32 +44,7 @@
   }
 </script>
 
-<ResponsivePageWrapper
-  breadcrumbs={{
-    links: [
-      { url: resolve('/home'), label: 'Home' },
-      { url: resolve('/newsletters'), label: 'Newsletters' },
-    ],
-    current: 'New',
-  }}
-  header={{
-    title: 'New',
-  }}
-  footer={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
-    ],
-  }}
-  navigationOverlay={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
-    ],
-  }}
->
+<ResponsivePageWrapper {...data.responsivePageWrapperOpts}>
   <section class="squish-16">
     <NewslettersHeader
       links={[

@@ -11,29 +11,7 @@
   let { data }: PageProps = $props();
 </script>
 
-<ResponsivePageWrapper
-  breadcrumbs={{
-    links: [{ url: resolve('/home'), label: 'Dashboard' }],
-    current: 'Profile',
-  }}
-  header={{
-    title: 'Home',
-  }}
-  footer={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
-    ],
-  }}
-  navigationOverlay={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
-    ],
-  }}
->
+<ResponsivePageWrapper {...data.responsivePageWrapperOpts}>
   <header
     class="align-items-center center-horizontal flex-row full-width justify-content-end"
     style="max-width: 42rem;"

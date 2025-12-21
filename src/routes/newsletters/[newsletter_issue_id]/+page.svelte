@@ -15,7 +15,6 @@
   import NewsletterService from '$lib/Services/NewsletterService';
   // types
   import type { PageProps } from './$types';
-  import type { ResolvedPathname } from '$app/types';
 
   let { data }: PageProps = $props();
 
@@ -23,26 +22,6 @@
   const newsletter = $derived(Newsletter.fromParams(data.newsletter));
 
   let disabled = $state(false);
-  let breadcrumbs: { url: ResolvedPathname; label: string }[] = $state([]);
-
-  $effect(() => {
-    if (!newsletter.published_at) {
-      breadcrumbs = Array.from(
-        new Set([
-          { url: resolve('/home'), label: 'Dashboard' },
-          { url: resolve('/newsletters'), label: 'Newsletters' },
-          { url: resolve('/newsletters/drafts'), label: 'Drafts' },
-        ]),
-      );
-    } else {
-      breadcrumbs = Array.from(
-        new Set([
-          { url: resolve('/home'), label: 'Dashboard' },
-          { url: resolve('/newsletters'), label: 'Newsletters' },
-        ]),
-      );
-    }
-  });
 
   async function onPublishNewsletter(e: SubmitEvent) {
     e.preventDefault();
@@ -70,29 +49,7 @@
   }
 </script>
 
-<ResponsivePageWrapper
-  breadcrumbs={{
-    links: breadcrumbs,
-    current: data.newsletter.slug,
-  }}
-  header={{
-    title: data.newsletter.slug,
-  }}
-  footer={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
-    ],
-  }}
-  navigationOverlay={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-      { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
-    ],
-  }}
->
+<ResponsivePageWrapper {...data.responsivePageWrapperOpts}>
   <section class="squish-16">
     <NewslettersHeader
       links={[
