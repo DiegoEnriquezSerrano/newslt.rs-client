@@ -1,22 +1,10 @@
-<script>
-  import { resolve } from '$app/paths';
+<script lang="ts">
   import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
+  import type { PageProps } from './$types';
+
+  let { data }: PageProps = $props();
 </script>
 
-<ResponsivePageWrapper
-  header={{ title: 'Home' }}
-  footer={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-    ],
-  }}
-  navigationOverlay={{
-    links: [
-      { label: 'Home', href: resolve('/home'), icon: 'home' },
-      { label: 'Newsletters', href: resolve('/newsletters'), icon: 'article' },
-    ],
-  }}
->
-  <h1>Hello, user!</h1>
+<ResponsivePageWrapper {...data.responsivePageWrapperOpts}>
+  <h1>Hello, {data.user.username}!</h1>
 </ResponsivePageWrapper>

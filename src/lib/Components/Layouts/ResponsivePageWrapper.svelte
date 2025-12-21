@@ -7,7 +7,8 @@
   // stores
   import { viewWidth } from '$lib/Stores/LayoutStore';
   // types
-  import type { ComponentProps, Snippet } from 'svelte';
+  import type { ResponsivePageWrapperSettings } from '$lib/Types/Components/ResponsivePageWrapperTypes';
+  import type { Snippet } from 'svelte';
 
   let {
     breadcrumbs,
@@ -15,13 +16,7 @@
     footer,
     header,
     navigationOverlay,
-  }: {
-    breadcrumbs?: ComponentProps<typeof Breadcrumbs>;
-    children: Snippet;
-    footer: ComponentProps<typeof Footer>;
-    header: ComponentProps<typeof Header>;
-    navigationOverlay: ComponentProps<typeof NavigationOverlay>;
-  } = $props();
+  }: ResponsivePageWrapperSettings & { children: Snippet } = $props();
 </script>
 
 <main class="display-grid full-height full-width max-height-view-100 overflow-hidden" id="app">

@@ -1,1 +1,12 @@
-export type IconTypes = 'article' | 'home' | 'logout' | 'menu' | 'user' | 'userFill' | 'x';
+export type IconTypes =
+  | 'article'
+  | 'caret'
+  | 'home'
+  | 'key'
+  | 'logout'
+  | 'menu'
+  | 'profile'
+  | 'settings'
+  | 'user'
+  | 'userFill'
+  | 'x';

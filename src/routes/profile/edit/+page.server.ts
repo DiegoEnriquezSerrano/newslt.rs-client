@@ -1,29 +1,29 @@
 import { redirect } from '@sveltejs/kit';
 import { resolve } from '$app/paths';
-import NewsletterService from '$lib/Services/NewsletterService';
-import type { NewsletterType } from '$lib/Types/NewsletterTypes';
+import UserService from '$lib/Services/UserService';
+import type { ProfileType } from '$lib/Types/UserTypes';
 import type { ResponsivePageWrapperSettings } from '$lib/Types/Components/ResponsivePageWrapperTypes';
 
 type PageProps = {
-  newsletters: NewsletterType[];
+  user: ProfileType;
   responsivePageWrapperOpts: ResponsivePageWrapperSettings;
 };
 
 export async function load({ fetch }): Promise<PageProps> {
-  const newslettersResponse = await NewsletterService.Api.getAuthUserDraftNewsletters(fetch);
+  const userResponse = await UserService.Api.getAuthUser(fetch);
 
-  if (newslettersResponse.ok) {
-    const newsletters: NewsletterType[] = await newslettersResponse.json();
+  if (userResponse.ok) {
+    const user: ProfileType = await userResponse.json();
 
     return {
-      newsletters,
+      user,
       responsivePageWrapperOpts: {
         breadcrumbs: {
           links: [
             { url: resolve('/home'), label: 'Home' },
-            { url: resolve('/newsletters'), label: 'Newsletters' },
+            { url: resolve('/profile'), label: 'Profile' },
           ],
-          current: 'Drafts',
+          current: 'Edit',
         },
         footer: {
           links: [
@@ -32,7 +32,7 @@ export async function load({ fetch }): Promise<PageProps> {
             { label: 'Settings', href: resolve('/settings'), icon: 'settings' },
           ],
         },
-        header: { title: 'Drafts' },
+        header: { title: 'Profile' },
         navigationOverlay: {
           links: [
             { label: 'Home', href: resolve('/home'), icon: 'home' },

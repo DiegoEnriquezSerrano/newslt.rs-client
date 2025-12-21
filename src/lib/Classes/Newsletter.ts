@@ -1,5 +1,6 @@
 import { dateStringFromISO, timeStringFromISO } from '$lib/utils';
 import type { NewsletterType, PublicNewsletterType } from '$lib/Types/NewsletterTypes';
+import type { AssociatedUserType } from '$lib/Types/UserTypes';
 
 export class Newsletter implements NewsletterType {
   content: string;
@@ -38,6 +39,7 @@ export class PublicNewsletter implements PublicNewsletterType {
   published_at: string;
   slug: string;
   title: string;
+  user: AssociatedUserType;
   // synthetic params
   publishedAtDate: string;
   publishedAtTime: string;
@@ -48,6 +50,7 @@ export class PublicNewsletter implements PublicNewsletterType {
     this.published_at = params.published_at;
     this.slug = params.slug;
     this.title = params.title;
+    this.user = params.user;
     this.publishedAtDate = dateStringFromISO(params.published_at);
     this.publishedAtTime = timeStringFromISO(params.published_at);
   }
