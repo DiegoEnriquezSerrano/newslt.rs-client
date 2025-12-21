@@ -12,3 +12,9 @@ export type ProfileType = {
   username: string;
   total_issues: number;
 };
+
+export type UpdateProfileParams = {
+  bio: string;
+  description: string;
+  displayName: string;
+};

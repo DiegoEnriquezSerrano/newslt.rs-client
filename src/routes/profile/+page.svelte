@@ -34,6 +34,16 @@
     ],
   }}
 >
+  <header
+    class="align-items-center center-horizontal flex-row full-width justify-content-end"
+    style="max-width: 42rem;"
+  >
+    <section class="align-items-center flex-row">
+      <a href={resolve(`/profile/edit`)} class="display-inline-flex text-color-cyan">
+        <strong class="squeeze-8 squish-8">Edit</strong>
+      </a>
+    </section>
+  </header>
   <section
     class={classList([
       'border-color-gray',
