@@ -45,6 +45,7 @@ const NewsletterService = {
           content: params.content,
           description: params.description,
           title: params.title,
+          cover_image: params.coverImage,
         }),
       );
 

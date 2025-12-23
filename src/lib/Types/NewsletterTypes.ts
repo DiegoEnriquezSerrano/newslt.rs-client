@@ -2,6 +2,7 @@ import type { AssociatedUserType } from './UserTypes';
 
 export type NewsletterType = {
   content: string;
+  cover_image_url: string;
   description: string;
   html_content: string;
   newsletter_issue_id: `${string}-${string}-${string}-${string}-${string}`;
@@ -15,6 +16,7 @@ export type CreateNewsletterParams = {
   content: NewsletterType['content'];
   description: NewsletterType['description'];
   title: NewsletterType['title'];
+  coverImage: string | ArrayBuffer | null;
 };
 
 export type UpdateNewsletterParams = {

@@ -42,6 +42,7 @@
 
     const response = await NewsletterService.Api.postNewsletter({
       content,
+      coverImage,
       description,
       title,
     });
