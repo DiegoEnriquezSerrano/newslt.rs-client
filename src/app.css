@@ -144,3 +144,32 @@ article-body a {
 article-body hr {
   border-color: var(--color-gray);
 }
+
+.modal-overlay {
+  left: 0;
+  max-height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  z-index: +5;
+}
+
+.modal-small {
+  max-width: 315px;
+}
+
+.modal-medium {
+  max-width: 500px;
+}
+
+.modal-large {
+  max-width: 90vw;
+}
+
+.modal-scrollable {
+  overflow-y: auto;
+  max-height: inherit;
+}
