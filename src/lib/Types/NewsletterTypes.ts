@@ -29,6 +29,10 @@ export type PublishNewsletterParams = {
   idempotencyKey: string;
 };
 
+export type UpdateNewsletterCoverImageParams = {
+  image: string | ArrayBuffer | null;
+};
+
 export type PublicNewsletterType = {
   content: string;
   description: string;

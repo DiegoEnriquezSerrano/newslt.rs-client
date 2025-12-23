@@ -9,6 +9,8 @@
   import NewslettersHeader from '$lib/Components/NewslettersHeader.svelte';
   import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
   import Spinner from '$lib/Components/Spinner.svelte';
+  // helpers
+  import { handleHttpResponseError } from '$lib/utils';
   // services
   import FlashMessageService from '$lib/Services/FlashMessageService';
   import NewsletterService from '$lib/Services/NewsletterService';
@@ -48,11 +50,14 @@
     });
 
     if (response.ok) {
+      FlashMessageService.setMessage({
+        type: 'success',
+        message: 'Newsletter created successfully.',
+      });
+
       await goto(resolve('/newsletters/drafts'));
     } else {
-      const json = await response.json();
-
-      FlashMessageService.setMessage({ type: 'error', message: json.error });
+      handleHttpResponseError(response);
     }
 
     setTimeout(() => (disabled = false), 1_000);
