@@ -1,4 +1,5 @@
 <script lang="ts">
+  // dependencies
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   // classes
@@ -10,6 +11,8 @@
   import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
   // enums
   import { NewsletterIssueCardMode } from '$lib/Enums/NewsletterEnums';
+  // helpers
+  import { handleHttpResponseError } from '$lib/utils';
   // services
   import FlashMessageService from '$lib/Services/FlashMessageService';
   import NewsletterService from '$lib/Services/NewsletterService';
@@ -39,10 +42,8 @@
       });
 
       await goto(resolve('/newsletters'));
-    } else if (response.status == 422) {
-      const json = await response.json();
-
-      FlashMessageService.setMessage({ message: json.error, type: 'error' });
+    } else {
+      await handleHttpResponseError(response);
     }
 
     setTimeout(() => (disabled = false), 1_000);

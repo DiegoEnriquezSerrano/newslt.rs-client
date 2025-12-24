@@ -33,8 +33,6 @@
 
     reader.onloadend = (e) => {
       photo = e.target?.result || null;
-
-      console.log(photo);
     };
 
     reader.readAsDataURL(file);
