@@ -9,6 +9,8 @@
   import NewslettersHeader from '$lib/Components/NewslettersHeader.svelte';
   import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
   import Spinner from '$lib/Components/Spinner.svelte';
+  // helpers
+  import { handleHttpResponseError } from '$lib/utils';
   // services
   import FlashMessageService from '$lib/Services/FlashMessageService';
   import NewsletterService from '$lib/Services/NewsletterService';
@@ -18,9 +20,23 @@
   let { data }: PageProps = $props();
 
   let content: string = $state('');
+  let coverImage: string | ArrayBuffer | null = $state('');
   let description: string = $state('');
   let disabled: boolean = $state(false);
   let title: string = $state('');
+
+  function getCoverImageBaseUrl(
+    e: Event & { currentTarget: EventTarget & HTMLInputElement },
+  ): void {
+    const file = e.currentTarget.files?.item(0) as Blob;
+    const reader = new FileReader();
+
+    reader.onloadend = (e) => {
+      coverImage = e.target?.result || '';
+    };
+
+    reader.readAsDataURL(file);
+  }
 
   async function onSubmitNewsletter(e: SubmitEvent) {
     e.preventDefault();
@@ -28,16 +44,20 @@
 
     const response = await NewsletterService.Api.postNewsletter({
       content,
+      coverImage,
       description,
       title,
     });
 
     if (response.ok) {
+      FlashMessageService.setMessage({
+        type: 'success',
+        message: 'Newsletter created successfully.',
+      });
+
       await goto(resolve('/newsletters/drafts'));
     } else {
-      const json = await response.json();
-
-      FlashMessageService.setMessage({ type: 'error', message: json.error });
+      handleHttpResponseError(response);
     }
 
     setTimeout(() => (disabled = false), 1_000);
@@ -60,6 +80,36 @@
     onsubmit={onSubmitNewsletter}
     style="max-width: 50rem;"
   >
+    <fieldset class="full-width squish-0 squeeze-0 gap-8 flex-column stack-24">
+      <label
+        class="font-weight-bold full-width text-align-start text-color-light squeeze-4"
+        for="coverImageUrl"
+      >
+        Cover Image
+      </label>
+      <input
+        class={[
+          'border-color-gray',
+          'border-rounded-8',
+          'border-style-inset',
+          'border-width-2',
+          'full-width',
+          'letter-spacing-1',
+          'line-height-large',
+          'squeeze-8',
+          'squish-8',
+          'sunken-1',
+          'surface-char',
+          'text-color-white',
+        ].join(' ')}
+        accept=".jpeg, .png, .jpg, .webp, .svg, .avif, .bmp, .gif"
+        id="coverImageUrl"
+        name="coverImageUrl"
+        onchange={getCoverImageBaseUrl}
+        type="file"
+        {disabled}
+      />
+    </fieldset>
     <label
       class="font-weight-bold full-width squeeze-4 text-align-start text-color-light"
       for="title"

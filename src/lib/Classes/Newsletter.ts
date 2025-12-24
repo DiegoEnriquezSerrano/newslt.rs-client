@@ -4,6 +4,7 @@ import type { AssociatedUserType } from '$lib/Types/UserTypes';
 
 export class Newsletter implements NewsletterType {
   content: string;
+  cover_image_url: string;
   description: string;
   html_content: string;
   newsletter_issue_id: `${string}-${string}-${string}-${string}-${string}`;
@@ -18,6 +19,7 @@ export class Newsletter implements NewsletterType {
 
   constructor(params: NewsletterType) {
     this.content = params.content;
+    this.cover_image_url = params.cover_image_url;
     this.description = params.description;
     this.html_content = params.html_content;
     this.newsletter_issue_id = params.newsletter_issue_id;

@@ -4,6 +4,8 @@
   import { resolve } from '$app/paths';
   // classes
   import { Newsletter } from '$lib/Classes/Newsletter';
+  // components
+  import CoverImage from '$lib/Components/CoverImage.svelte';
   // enums
   import { NewsletterIssueCardMode } from '$lib/Enums/NewsletterEnums';
   // stores
@@ -26,6 +28,10 @@
   class:squish-16={$viewWidth > 650}
   in:fly={{ y: -50, duration: 250, delay: 100, easing: quintOut }}
 >
+  <CoverImage
+    src={newsletterIssue.cover_image_url}
+    alt="Cover image for article: '{newsletterIssue.title}'"
+  />
   <h2
     class="full-width line-height-extra-large overflow-wrap-break-word overflow-hidden squeeze-8 squish-16 center-horizontal"
   >

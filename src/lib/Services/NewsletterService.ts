@@ -4,6 +4,7 @@ import type {
   CreateNewsletterParams,
   NewsletterType,
   PublishNewsletterParams,
+  UpdateNewsletterCoverImageParams,
   UpdateNewsletterParams,
 } from '$lib/Types/NewsletterTypes';
 
@@ -45,6 +46,7 @@ const NewsletterService = {
           content: params.content,
           description: params.description,
           title: params.title,
+          cover_image: params.coverImage,
         }),
       );
 
@@ -72,6 +74,16 @@ const NewsletterService = {
           idempotency_key: params.idempotencyKey,
         }),
       );
+
+      return fetch(url, opts);
+    },
+
+    async putUpdateNewsletterCoverImage(
+      newsletter_issue_id: NewsletterType['newsletter_issue_id'],
+      params: UpdateNewsletterCoverImageParams,
+    ): Promise<Response> {
+      const url = `${import.meta.env.VITE_API_URL}/admin/newsletter/${newsletter_issue_id}/cover_image`;
+      const opts = ApiService.requestInit('PUT', JSON.stringify(params));
 
       return fetch(url, opts);
     },
