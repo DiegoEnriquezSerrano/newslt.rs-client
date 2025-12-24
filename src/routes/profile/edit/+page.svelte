@@ -7,8 +7,10 @@
   // components
   import ExpandingTextarea from '$lib/Components/ExpandingTextarea.svelte';
   import FormButton from '$lib/Components/FormButton.svelte';
+  import Icon from '$lib/Components/Icon.svelte';
   import InputWithCounter from '$lib/Components/InputWithCounter.svelte';
   import ResponsivePageWrapper from '$lib/Components/Layouts/ResponsivePageWrapper.svelte';
+  import UpdateProfileAvatarModal from '$lib/Components/UpdateProfileAvatarModal.svelte';
   import UpdateProfileBannerModal from '$lib/Components/UpdateProfileBannerModal.svelte';
   // services
   import FlashMessageService from '$lib/Services/FlashMessageService';
@@ -22,6 +24,7 @@
   let description = $derived(data.user.description);
   let disabled = $state(false);
   let displayName = $derived(data.user.display_name);
+  let showAvatarModal = $state(false);
   let showBannerModal = $state(false);
 
   async function onUpdateProfile(e: SubmitEvent) {
@@ -46,6 +49,10 @@
     }
 
     setTimeout(() => (disabled = false), 1_000);
+  }
+
+  function openAvatarModal() {
+    showAvatarModal = true;
   }
 
   function openBannerModal() {
@@ -95,6 +102,37 @@
           Banner
         </button>
       </div>
+    </div>
+    <div
+      class="align-items-end center-horizontal flex-row justify-content-start"
+      style="margin-top: -75px; z-index: +1; max-width: 40rem;"
+    >
+      <figure class="align-items-start push-8" style="width: 150px;">
+        {#if Boolean(data.user.avatar_url.trim())}
+          <img
+            alt={data.user.username}
+            class="display-block border-rounded-circle overflow-hidden raised-1 border-style-outset border-color-gray border-width-2 surface-char"
+            height={150}
+            src={data.user.avatar_url}
+            width={150}
+          />
+        {:else}
+          <Icon
+            classes="display-block border-rounded-circle overflow-hidden raised-1 border-style-outset border-color-gray border-width-2 surface-char"
+            fill="var(--color-cyan)"
+            height={[150, 'px']}
+            stroke="var(--color-cyan)"
+            type="userFill"
+            width={[150, 'px']}
+          />
+        {/if}
+      </figure>
+      <button
+        class="border-color-gray border-rounded-8 border-style-outset border-width-2 cursor-pointer font-weight-bold raised-1 squeeze-16 squish-8 surface-char text-color-light"
+        onclick={openAvatarModal}
+      >
+        Avatar
+      </button>
     </div>
   </section>
   <section class="full-width flex-column align-items-start squeeze-8">
@@ -150,3 +188,4 @@
   </section>
 </ResponsivePageWrapper>
 <UpdateProfileBannerModal bind:show={showBannerModal} bind:disabled />
+<UpdateProfileAvatarModal bind:show={showAvatarModal} bind:disabled />
