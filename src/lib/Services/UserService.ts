@@ -1,16 +1,11 @@
-import ApiService from './ApiService';
+import ApiService from '$lib/Services/ApiService';
 import type { FetchFn } from '$lib/Types/ApiTypes';
-import type { UpdateProfileParams } from '$lib/Types/UserTypes';
-
-type ChangePasswordParams = {
-  currentPassword: string;
-  newPassword: string;
-  newPasswordCheck: string;
-};
-
-type UpdateProfileBannerParams = {
-  bannerUrl: string;
-};
+import type {
+  ChangePasswordParams,
+  UpdateProfileAvatarParams,
+  UpdateProfileBannerParams,
+  UpdateProfileParams,
+} from '$lib/Types/UserTypes';
 
 const UserService = {
   Api: {
@@ -31,6 +26,13 @@ const UserService = {
           bio: params.bio,
         }),
       );
+
+      return await fetch(url, opts);
+    },
+
+    async putAuthUpdateProfileAvatar(params: UpdateProfileAvatarParams): Promise<Response> {
+      const url = `${import.meta.env.VITE_API_URL}/admin/user/avatar`;
+      const opts = ApiService.requestInit('PUT', JSON.stringify({ image: params.avatarUrl }));
 
       return await fetch(url, opts);
     },

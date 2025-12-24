@@ -1,10 +1,13 @@
 export type AssociatedUserType = {
+  avatar_url: string;
+  banner_url: string;
   description: string;
   dispay_name: string;
   username: string;
 };
 
 export type ProfileType = {
+  avatar_url: string;
   banner_url: string;
   bio: string;
   bio_html: string;
@@ -18,4 +21,18 @@ export type UpdateProfileParams = {
   bio: string;
   description: string;
   displayName: string;
+};
+
+export type ChangePasswordParams = {
+  currentPassword: string;
+  newPassword: string;
+  newPasswordCheck: string;
+};
+
+export type UpdateProfileAvatarParams = {
+  avatarUrl: string;
+};
+
+export type UpdateProfileBannerParams = {
+  bannerUrl: string;
 };
