@@ -8,6 +8,10 @@ type ChangePasswordParams = {
   newPasswordCheck: string;
 };
 
+type UpdateProfileBannerParams = {
+  bannerUrl: string;
+};
+
 const UserService = {
   Api: {
     async getAuthUser(fetchFn: FetchFn): Promise<Response> {
@@ -27,6 +31,13 @@ const UserService = {
           bio: params.bio,
         }),
       );
+
+      return await fetch(url, opts);
+    },
+
+    async putAuthUpdateProfileBanner(params: UpdateProfileBannerParams): Promise<Response> {
+      const url = `${import.meta.env.VITE_API_URL}/admin/user/banner`;
+      const opts = ApiService.requestInit('PUT', JSON.stringify({ image: params.bannerUrl }));
 
       return await fetch(url, opts);
     },
