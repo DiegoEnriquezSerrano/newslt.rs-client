@@ -5,6 +5,7 @@ export type AssociatedUserType = {
 };
 
 export type ProfileType = {
+  banner_url: string;
   bio: string;
   bio_html: string;
   description: string;
