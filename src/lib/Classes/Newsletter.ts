@@ -1,6 +1,6 @@
 import { dateStringFromISO, timeStringFromISO } from '$lib/utils';
+import { AssociatedUser } from '$lib/Classes/User';
 import type { NewsletterType, PublicNewsletterType } from '$lib/Types/NewsletterTypes';
-import type { AssociatedUserType } from '$lib/Types/UserTypes';
 
 export class Newsletter implements NewsletterType {
   content: string;
@@ -36,23 +36,27 @@ export class Newsletter implements NewsletterType {
 }
 
 export class PublicNewsletter implements PublicNewsletterType {
+  cover_image_url: string;
   description: string;
   content: string;
   published_at: string;
   slug: string;
   title: string;
-  user: AssociatedUserType;
+  user: AssociatedUser;
   // synthetic params
+  hasCoverImage: boolean;
   publishedAtDate: string;
   publishedAtTime: string;
 
   constructor(params: PublicNewsletterType) {
     this.description = params.description;
     this.content = params.content;
+    this.cover_image_url = params.cover_image_url;
     this.published_at = params.published_at;
     this.slug = params.slug;
     this.title = params.title;
-    this.user = params.user;
+    this.user = AssociatedUser.fromParams(params.user);
+    this.hasCoverImage = Boolean(params.cover_image_url.trim());
     this.publishedAtDate = dateStringFromISO(params.published_at);
     this.publishedAtTime = timeStringFromISO(params.published_at);
   }
