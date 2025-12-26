@@ -44,6 +44,13 @@ const UserService = {
       return await fetch(url, opts);
     },
 
+    async getUser(username: string): Promise<Response> {
+      const url = `${import.meta.env.VITE_API_URL}/users/${username}`;
+      const opts = ApiService.requestInit();
+
+      return await fetch(url, opts);
+    },
+
     async putPassword(params: ChangePasswordParams): Promise<Response> {
       const url = `${import.meta.env.VITE_API_URL}/admin/password`;
       const opts = ApiService.requestInit(
