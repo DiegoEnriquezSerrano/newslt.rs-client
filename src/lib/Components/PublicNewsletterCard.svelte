@@ -23,7 +23,7 @@
 </script>
 
 <article
-  class="border-color-gray border-rounded-16 border-style-outset border-width-2 center-horizontal raised-1"
+  class="border-color-gray border-rounded-16 border-style-outset border-width-2 center-horizontal raised-1 stack-24"
   class:large={type === NewsletterIssueCardMode.Content}
   class:squeeze-8={$viewWidth < 650}
   class:squeeze-16={$viewWidth > 650}
@@ -31,18 +31,20 @@
   class:squish-16={$viewWidth > 650}
   in:fly={{ y: -50, duration: 250, delay: 100, easing: quintOut }}
 >
-  <CoverImage
-    src={newsletterIssue.cover_image_url}
-    alt="Cover image for newsletter issue: '{newsletterIssue.title}'"
-  />
+  <a href={newsletterIssue.articleHref}>
+    <CoverImage
+      src={newsletterIssue.cover_image_url}
+      alt="Cover image for newsletter issue: '{newsletterIssue.title}'"
+    />
+  </a>
   <h2
     class="center-horizontal full-width line-height-extra-large overflow-hidden overflow-wrap-break-word squeeze-8 squish-16"
     class:drop-8={!newsletterIssue.hasCoverImage}
   >
     {#if type == NewsletterIssueCardMode.Description}
-      <b class="text-color-cyan">
+      <a class="text-color-cyan" href={newsletterIssue.articleHref}>
         {newsletterIssue.title}
-      </b>
+      </a>
     {:else}
       {newsletterIssue.title}
     {/if}
@@ -50,7 +52,8 @@
   <div
     class="align-items-stretch center-horizontal flex-row justify-content-start squeeze-8 squish-8"
   >
-    <div
+    <a
+      href={newsletterIssue.userHref}
       class={classList([
         'aspect-ratio-medium-format',
         'border-color-gray',
@@ -80,19 +83,27 @@
           width={[50, 'px']}
         />
       {/if}
-    </div>
+    </a>
     <div class="flex-column justify-content-space-evenly squeeze-8">
-      <span class="dim-70 text-color-white text-shadow-1">@{newsletterIssue.user.username}</span>
+      <a
+        class="dim-70 text-color-white text-shadow-1 hover-decoration-none"
+        href={newsletterIssue.userHref}
+      >
+        @{newsletterIssue.user.username}
+      </a>
       {#if newsletterIssue.user.hasDisplayName}
-        <b class="text-color-cyan">
+        <a href={newsletterIssue.userHref} class="text-color-cyan">
           {newsletterIssue.user.display_name}
-        </b>
+        </a>
       {/if}
     </div>
   </div>
-  <p class="center-horizontal dim-70 squeeze-8 text-color-white squish-8">
+  <a
+    href={newsletterIssue.articleHref}
+    class="center-horizontal dim-70 display-inline-flex hover-decoration-none squeeze-8 squish-8 text-color-light"
+  >
     {newsletterIssue.publishedAtDate} at {newsletterIssue.publishedAtTime}
-  </p>
+  </a>
   {#if type == NewsletterIssueCardMode.Description}
     <p class="squeeze-8 stack-16">
       {newsletterIssue.description}
