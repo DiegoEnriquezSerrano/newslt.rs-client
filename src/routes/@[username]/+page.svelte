@@ -3,6 +3,7 @@
   import { resolve } from '$app/paths';
   // components
   import Breadcrumbs from '$lib/Components/Breadcrumbs.svelte';
+  import Html from '$lib/Components/Html.svelte';
   import Icon from '$lib/Components/Icon.svelte';
   import PublicNewsletterCard from '$lib/Components/PublicNewsletterCard.svelte';
   import PublicPageWrapper from '$lib/Components/Layouts/PublicPageWrapper.svelte';
@@ -82,7 +83,7 @@
     </div>
     {#if Boolean(data.user.bio.trim())}
       <p class="squeeze-16 squish-8 stack-8">
-        {@html data.user.bio}
+        <Html markupText={data.user.bio_html} />
       </p>
     {/if}
   </section>

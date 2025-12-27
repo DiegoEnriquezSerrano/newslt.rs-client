@@ -1,12 +1,11 @@
 <script lang="ts">
-  // dependencies
-  import { quintOut } from 'svelte/easing';
-  import { fly } from 'svelte/transition';
   // classes
   import { PublicNewsletter } from '$lib/Classes/Newsletter';
   // components
   import CoverImage from '$lib/Components/CoverImage.svelte';
+  import Html from '$lib/Components/Html.svelte';
   import Icon from '$lib/Components/Icon.svelte';
+  import Link from '$lib/Components/Link.svelte';
   // enums
   import { NewsletterIssueCardMode } from '$lib/Enums/NewsletterEnums';
   // helpers
@@ -29,32 +28,39 @@
   class:squeeze-16={$viewWidth > 650}
   class:squish-8={$viewWidth < 650}
   class:squish-16={$viewWidth > 650}
-  in:fly={{ y: -50, duration: 250, delay: 100, easing: quintOut }}
 >
-  <a href={newsletterIssue.articleHref}>
+  {#if type === NewsletterIssueCardMode.Description}
+    <Link href={newsletterIssue.articleHref}>
+      <CoverImage
+        src={newsletterIssue.cover_image_url}
+        alt="Cover image for newsletter issue: '{newsletterIssue.title}'"
+      />
+    </Link>
+  {:else}
     <CoverImage
       src={newsletterIssue.cover_image_url}
       alt="Cover image for newsletter issue: '{newsletterIssue.title}'"
     />
-  </a>
+  {/if}
   <h2
     class="center-horizontal full-width line-height-extra-large overflow-hidden overflow-wrap-break-word squeeze-8 squish-16"
     class:drop-8={!newsletterIssue.hasCoverImage}
   >
     {#if type == NewsletterIssueCardMode.Description}
-      <a class="text-color-cyan" href={newsletterIssue.articleHref}>
+      <Link classes="text-color-cyan" href={newsletterIssue.articleHref}>
         {newsletterIssue.title}
-      </a>
+      </Link>
     {:else}
-      {newsletterIssue.title}
+      <b>
+        {newsletterIssue.title}
+      </b>
     {/if}
   </h2>
   <div
     class="align-items-stretch center-horizontal flex-row justify-content-start squeeze-8 squish-8"
   >
-    <a
-      href={newsletterIssue.userHref}
-      class={classList([
+    <Link
+      classes={classList([
         'aspect-ratio-medium-format',
         'border-color-gray',
         'border-rounded-circle',
@@ -65,6 +71,7 @@
         'raised-1',
         'surface-char',
       ])}
+      href={newsletterIssue.userHref}
     >
       {#if newsletterIssue.user.hasAvatarImage}
         <img
@@ -83,34 +90,36 @@
           width={[50, 'px']}
         />
       {/if}
-    </a>
+    </Link>
     <div class="flex-column justify-content-space-evenly squeeze-8">
-      <a
-        class="dim-70 text-color-white text-shadow-1 hover-decoration-none"
+      <Link
+        classes="dim-70 text-color-white text-shadow-1 hover-decoration-none"
         href={newsletterIssue.userHref}
       >
         @{newsletterIssue.user.username}
-      </a>
+      </Link>
       {#if newsletterIssue.user.hasDisplayName}
-        <a href={newsletterIssue.userHref} class="text-color-cyan">
+        <Link classes="text-color-cyan" href={newsletterIssue.userHref}>
           {newsletterIssue.user.display_name}
-        </a>
+        </Link>
       {/if}
     </div>
   </div>
-  <a
-    href={newsletterIssue.articleHref}
-    class="center-horizontal dim-70 display-inline-flex hover-decoration-none squeeze-8 squish-8 text-color-light"
-  >
-    {newsletterIssue.publishedAtDate} at {newsletterIssue.publishedAtTime}
-  </a>
+  <div class="center-horizontal">
+    <Link
+      classes="dim-70 display-flex hover-decoration-none squeeze-8 squish-8 text-color-light"
+      href={newsletterIssue.articleHref}
+    >
+      {newsletterIssue.publishedAtDate} at {newsletterIssue.publishedAtTime}
+    </Link>
+  </div>
   {#if type == NewsletterIssueCardMode.Description}
     <p class="squeeze-8 stack-16">
       {newsletterIssue.description}
     </p>
   {:else}
     <article-body class="center-horizontal flex-column squeeze-8">
-      {@html newsletterIssue.content}
+      <Html markupText={newsletterIssue.content} />
     </article-body>
   {/if}
 </article>
