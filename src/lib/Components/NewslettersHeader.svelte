@@ -1,6 +1,7 @@
 <script lang="ts">
-  import type { ResolvedPathname } from '$app/types';
+  import Link from '$lib/Components/Link.svelte';
   import type { Snippet } from 'svelte';
+  import type { ResolvedPathname } from '$app/types';
 
   type Links = {
     href: ResolvedPathname;
@@ -19,10 +20,9 @@
       {#if i !== 0}
         <span>|</span>
       {/if}
-      <!-- eslint-disable svelte/no-navigation-without-resolve -->
-      <a href={link.href} class="text-color-cyan">
+      <Link href={link.href} classes="text-color-cyan">
         <strong>{link.label}</strong>
-      </a>
+      </Link>
     {/each}
   </section>
   {#if children}

@@ -2,7 +2,7 @@ export type AssociatedUserType = {
   avatar_url: string;
   banner_url: string;
   description: string;
-  dispay_name: string;
+  display_name: string;
   username: string;
 };
 

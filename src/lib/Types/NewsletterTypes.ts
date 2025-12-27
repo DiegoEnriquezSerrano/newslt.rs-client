@@ -35,6 +35,7 @@ export type UpdateNewsletterCoverImageParams = {
 
 export type PublicNewsletterType = {
   content: string;
+  cover_image_url: string;
   description: string;
   published_at: string;
   slug: string;

@@ -17,6 +17,7 @@
 </script>
 
 <button
+  class:dim-50={disabled}
   class="squeeze-16 squish-8 border-rounded-8 border-style-outset text-color-white surface-char border-width-2 border-color-gray text-color-light raised-1 font-weight-bold cursor-pointer"
   data-testid={id}
   {disabled}
@@ -26,9 +27,3 @@
 >
   {@render children()}
 </button>
-
-<style>
-  button:disabled {
-    opacity: 0.5;
-  }
-</style>
