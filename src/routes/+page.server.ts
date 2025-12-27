@@ -4,7 +4,11 @@ import type { PublicNewsletterType } from '$lib/Types/NewsletterTypes';
 export async function load() {
   const newslettersResponse = await NewsletterService.Api.getNewsletters();
 
-  let newsletters: PublicNewsletterType[] = await newslettersResponse.json();
+  let newsletters: PublicNewsletterType[] = [];
+
+  if (newslettersResponse.ok) {
+    newsletters = await newslettersResponse.json();
+  }
 
   return { newsletters };
 }
