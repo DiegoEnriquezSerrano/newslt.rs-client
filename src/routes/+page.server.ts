@@ -1,10 +1,18 @@
 import NewsletterService from '$lib/Services/NewsletterService';
 import type { PublicNewsletterType } from '$lib/Types/NewsletterTypes';
 
-export async function load() {
+type PageProps = {
+  newsletters: PublicNewsletterType[];
+};
+
+export async function load(): Promise<PageProps> {
   const newslettersResponse = await NewsletterService.Api.getNewsletters();
 
-  let newsletters: PublicNewsletterType[] = await newslettersResponse.json();
+  let newsletters: PublicNewsletterType[] = [];
+
+  if (newslettersResponse.ok) {
+    newsletters = await newslettersResponse.json();
+  }
 
   return { newsletters };
 }

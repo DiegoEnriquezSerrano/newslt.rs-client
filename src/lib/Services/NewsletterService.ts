@@ -24,6 +24,13 @@ const NewsletterService = {
       return await fetch(url, opts);
     },
 
+    async getNewsletter(username: string, slug: string): Promise<Response> {
+      const url = `${import.meta.env.VITE_API_URL}/newsletters/by_user/${username}/issue/${slug}`;
+      const opts = ApiService.requestInit();
+
+      return await fetch(url, opts);
+    },
+
     async getAuthUserNewsletters(fetchFn: FetchFn): Promise<Response> {
       const url = `${import.meta.env.VITE_API_URL}/admin/newsletters`;
       const opts = ApiService.requestInit();

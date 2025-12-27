@@ -4,10 +4,11 @@ import { render } from 'vitest-browser-svelte';
 import Page from './+page.svelte';
 
 describe('/+page.svelte', () => {
-  it('should render h1', async () => {
-    render(Page);
+  it('should render header', async () => {
+    render(Page, { data: { newsletters: [] }, params: {}, form: undefined });
 
-    const heading = page.getByRole('heading', { level: 1 });
+    const heading = page.getByText('Newsletters');
+
     await expect.element(heading).toBeInTheDocument();
   });
 });
