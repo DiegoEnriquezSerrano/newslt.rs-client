@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Link from '$lib/Components/Link.svelte';
   import type { ResolvedPathname } from '$app/types';
 
   type Links = {
@@ -13,8 +14,7 @@
   class="align-items-center flex-row flex-wrap-no-wrap full-width gap-8 overflow-x-auto overflow-y-hidden squish-8"
 >
   {#each links as link (link.url)}
-    <!-- eslint-disable svelte/no-navigation-without-resolve -->
-    <a class="text-color-cyan text-bold text-small" href={link.url}>{link.label}</a>
+    <Link classes="text-color-cyan text-bold text-small" href={link.url}>{link.label}</Link>
     <strong>&raquo;</strong>
   {/each}
   <span class="text-small white-space-nowrap">{current}</span>
