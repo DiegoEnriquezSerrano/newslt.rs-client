@@ -1,4 +1,6 @@
 <script lang="ts">
+  // dependencies
+  import { resolve } from '$app/paths';
   // components
   import Icon from '$lib/Components/Icon.svelte';
   import IconButton from '$lib/Components/IconButton.svelte';
@@ -17,7 +19,7 @@
     label: string;
   }[];
 
-  let { links }: { links: Links } = $props();
+  let { links, isAuthenticated = false }: { links: Links; isAuthenticated?: boolean } = $props();
 
   const direction = 'ltr';
 </script>
@@ -56,14 +58,25 @@
         type={link.icon}
       />
     {/each}
-    <IconButton
-      {direction}
-      fill="var(--color-cyan)"
-      onclick={AuthenticationService.onLogout}
-      stroke="var(--color-cyan)"
-      text="Logout"
-      type="logout"
-    />
+    {#if isAuthenticated}
+      <IconButton
+        {direction}
+        fill="var(--color-cyan)"
+        onclick={AuthenticationService.onLogout}
+        stroke="var(--color-cyan)"
+        text="Logout"
+        type="logout"
+      />
+    {:else}
+      <IconButton
+        {direction}
+        fill="var(--color-cyan)"
+        href={resolve('/login')}
+        stroke="var(--color-cyan)"
+        text="Login"
+        type="login"
+      />
+    {/if}
     <hr class="stack-32" />
     <div
       class="border-color-gray border-style-outset border-top-width-1 border-width-0 full-height full-width"

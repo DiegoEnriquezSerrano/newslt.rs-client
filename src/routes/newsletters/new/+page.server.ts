@@ -35,6 +35,7 @@ export async function load({ fetch }): Promise<PageProps> {
             { label: 'Profile', href: resolve('/profile'), icon: 'profile' },
             { label: 'Settings', href: resolve('/settings'), icon: 'settings' },
           ],
+          isAuthenticated: true,
         },
       },
     };

@@ -11,7 +11,9 @@
 </script>
 
 <PublicPageWrapper>
-  {#each data.newsletters as newsletter (newsletter.slug)}
-    <PublicNewsletterCard {newsletter} type={NewsletterIssueCardMode.Description} />
-  {/each}
+  <section class="squish-16">
+    {#each data.newsletters as newsletter (newsletter.slug)}
+      <PublicNewsletterCard {newsletter} type={NewsletterIssueCardMode.Description} />
+    {/each}
+  </section>
 </PublicPageWrapper>

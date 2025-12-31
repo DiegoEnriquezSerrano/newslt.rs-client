@@ -1,12 +1,9 @@
 <script lang="ts">
-  // dependencies
-  import { resolve } from '$app/paths';
   // components
-  import Breadcrumbs from '$lib/Components/Breadcrumbs.svelte';
+  import DynamicPageWrapper from '$lib/Components/Layouts/DynamicPageWrapper.svelte';
   import Html from '$lib/Components/Html.svelte';
   import Icon from '$lib/Components/Icon.svelte';
   import PublicNewsletterCard from '$lib/Components/PublicNewsletterCard.svelte';
-  import PublicPageWrapper from '$lib/Components/Layouts/PublicPageWrapper.svelte';
   // enums
   import { NewsletterIssueCardMode } from '$lib/Enums/NewsletterEnums';
   // helpers
@@ -21,12 +18,14 @@
   let avatarSize: number = $derived($viewWidth < 650 ? 100 : 125);
 </script>
 
-<PublicPageWrapper>
-  <section class="stack-16">
-    <Breadcrumbs links={[{ url: resolve('/'), label: 'Home' }]} current={data.user.username} />
-  </section>
+<DynamicPageWrapper
+  breadcrumbs={data.breadcrumbs}
+  footer={data.footer}
+  header={data.header}
+  navigationOverlay={data.navigationOverlay}
+>
   <section
-    class="border-color-gray border-rounded-16 border-style-outset border-width-2 center-horizontal overflow-hidden raised-1 stack-24"
+    class="border-color-gray border-rounded-16 border-style-outset border-width-2 center-horizontal overflow-hidden raised-1 stack-24 drop-8"
     style="max-width: 40rem;"
   >
     <div>
@@ -83,11 +82,11 @@
     </div>
     {#if Boolean(data.user.bio.trim())}
       <p class="squeeze-16 squish-8 stack-8">
-        <Html markupText={data.user.bio_html} />
+        <Html markupText={data.user.bio} />
       </p>
     {/if}
   </section>
   {#each data.newsletters as newsletter (newsletter.slug)}
     <PublicNewsletterCard {newsletter} type={NewsletterIssueCardMode.Description} />
   {/each}
-</PublicPageWrapper>
+</DynamicPageWrapper>
