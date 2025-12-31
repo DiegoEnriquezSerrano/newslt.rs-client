@@ -7,7 +7,7 @@ describe('/+page.svelte', () => {
   it('should render header', async () => {
     render(Page, { data: { newsletters: [] }, params: {}, form: undefined });
 
-    const heading = page.getByText('Newsletters');
+    const heading = page.getByText('newslt.rs');
 
     await expect.element(heading).toBeInTheDocument();
   });

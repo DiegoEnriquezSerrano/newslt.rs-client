@@ -3,6 +3,7 @@ export type IconTypes =
   | 'caret'
   | 'home'
   | 'key'
+  | 'login'
   | 'logout'
   | 'menu'
   | 'profile'
