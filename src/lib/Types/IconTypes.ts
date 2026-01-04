@@ -7,6 +7,7 @@ export type IconTypes =
   | 'logout'
   | 'menu'
   | 'profile'
+  | 'redo'
   | 'settings'
   | 'user'
   | 'userFill'
