@@ -23,6 +23,13 @@ const SubscriptionService = {
 
       return await fetch(url, opts);
     },
+
+    async putConfirmSubscription(body: { subscriptionToken: string }): Promise<Response> {
+      const url = `${import.meta.env.VITE_API_URL}/subscriptions/confirm?subscription_token=${String(body.subscriptionToken)}`;
+      const opts = ApiService.requestInit('PUT');
+
+      return await fetch(url, opts);
+    },
   },
 };
 
