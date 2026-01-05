@@ -4,10 +4,13 @@
   import Html from '$lib/Components/Html.svelte';
   import Icon from '$lib/Components/Icon.svelte';
   import PublicNewsletterCard from '$lib/Components/PublicNewsletterCard.svelte';
+  import SubscribeModal from '$lib/Components/SubscribeModal.svelte';
   // enums
   import { NewsletterIssueCardMode } from '$lib/Enums/NewsletterEnums';
   // helpers
   import { classList } from '$lib/utils';
+  // services
+  import ChallengeService from '$lib/Services/ChallengeService';
   // stores
   import { viewWidth } from '$lib/Stores/LayoutStore';
   // types
@@ -16,6 +19,22 @@
   let { data }: PageProps = $props();
 
   let avatarSize: number = $derived($viewWidth < 650 ? 100 : 125);
+  let showSubscribeModal = $state(false);
+  let challenge = $state(null);
+  let challengeImage = $state(null);
+
+  async function openSubscribeModal() {
+    const response = await ChallengeService.Api.getCaptcha();
+
+    if (response.ok) {
+      const captcha = await response.json();
+
+      challenge = captcha.challenge;
+      challengeImage = captcha.challenge_image;
+    }
+
+    showSubscribeModal = true;
+  }
 </script>
 
 <DynamicPageWrapper
@@ -30,6 +49,15 @@
   >
     <div>
       <div class="full-width" style="aspect-ratio: calc(4 / 1);">
+        <p
+          class="squeeze-8 squish-8 position-absolute"
+          style="right: var(--spacing-8); top: var(--spacing-8);"
+        >
+          <button
+            class="surface-char text-color-cyan border-color-gray border-rounded-8 border-style-outset border-width-2 cursor-pointer font-weight-bold squeeze-8 squish-8 raised-1"
+            onclick={openSubscribeModal}>Subscribe</button
+          >
+        </p>
         <img
           alt="Profile banner for {data.user.username}"
           class="border-width-0 border-bottom-width-2 border-style-outset border-color-gray"
@@ -80,6 +108,7 @@
         </div>
       </div>
     </div>
+
     {#if Boolean(data.user.bio.trim())}
       <p class="squeeze-16 squish-8 stack-8">
         <Html markupText={data.user.bio} />
@@ -90,3 +119,10 @@
     <PublicNewsletterCard {newsletter} type={NewsletterIssueCardMode.Description} />
   {/each}
 </DynamicPageWrapper>
+<SubscribeModal
+  bind:challenge
+  bind:challengeImage
+  bind:show={showSubscribeModal}
+  username={data.user.username}
+  disabled={false}
+/>
