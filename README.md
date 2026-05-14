@@ -1,3 +1,7 @@
+> [!WARNING]
+> This repository will become inactive as of May 14, 2026.
+> Future project maintenance will be tracked [here](https://codeberg.org/diegoenriquezserrano/newslt.rs)
+
 # Newslt.rs-client
 
 [![Bun CI](https://github.com/DiegoEnriquezSerrano/newslt.rs-client/actions/workflows/ci.yml/badge.svg)](https://github.com/DiegoEnriquezSerrano/newslt.rs-client/actions/workflows/ci.yml)
